@@ -1,0 +1,137 @@
+.order-list {
+  padding: 20px;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 30px;
+}
+
+.header h1 {
+  margin: 0;
+  color: #333;
+}
+
+.clear-btn {
+  background: #f44336;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  padding: 12px 24px;
+  font-size: 16px;
+  cursor: pointer;
+  transition: background 0.2s ease;
+}
+
+.clear-btn:hover {
+  background: #d32f2f;
+}
+
+.loading {
+  text-align: center;
+  font-size: 18px;
+  padding: 50px;
+}
+
+.no-orders {
+  text-align: center;
+  padding: 50px;
+  color: #666;
+  font-size: 18px;
+}
+
+.orders-container {
+  display: grid;
+  gap: 20px;
+}
+
+.order-card {
+  background: #fff;
+  border: 1px solid #ddd;
+  border-radius: 12px;
+  padding: 20px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+}
+
+.order-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 15px;
+  padding-bottom: 10px;
+  border-bottom: 1px solid #eee;
+}
+
+.order-header h3 {
+  margin: 0;
+  color: #333;
+}
+
+.order-date {
+  color: #666;
+  font-size: 14px;
+}
+
+.order-details p {
+  margin: 10px 0;
+  color: #333;
+}
+
+.order-items {
+  margin: 15px 0;
+}
+
+.order-items h4 {
+  margin: 0 0 10px 0;
+  color: #333;
+}
+
+.item-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 8px 0;
+  border-bottom: 1px solid #f0f0f0;
+}
+
+.item-row:last-child {
+  border-bottom: none;
+}
+
+.order-total {
+  margin-top: 15px;
+  padding-top: 10px;
+  border-top: 2px solid #eee;
+  text-align: right;
+  font-size: 18px;
+  color: #333;
+}
+
+/* Responsive design */
+@media (max-width: 768px) {
+  .order-list {
+    padding: 15px;
+  }
+  
+  .header {
+    flex-direction: column;
+    gap: 15px;
+    align-items: stretch;
+  }
+  
+  .order-header {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 5px;
+  }
+  
+  .item-row {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 5px;
+  }
+}

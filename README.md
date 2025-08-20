@@ -1,49 +1,75 @@
-# Getting Started with Create React App
+# Cafe 320 POS System
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+A simple Point of Sale (POS) system built with React and Supabase, optimized for iPad use.
 
-## Available Scripts
+## Features
 
-In the project directory, you can run:
+- **Product Selection**: Simple grid interface for selecting products without images
+- **Order Management**: Add/remove items, adjust quantities
+- **Customer Input**: Collect customer names for orders
+- **Order History**: View and manage all orders
+- **Clear Orders**: Admin function to clear all order history
+- **iPad Optimized**: Responsive design for tablet use
 
-### `npm start`
+## Setup Instructions
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+### 1. Supabase Setup
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+1. Create a new project at [supabase.com](https://supabase.com)
+2. Go to your project settings and copy the Project URL and anon public key
+3. Run the SQL commands from `supabase-schema.sql` in your Supabase SQL editor
 
-### `npm test`
+### 2. Environment Configuration
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+1. Copy `.env.example` to `.env.local`
+2. Update the values with your Supabase credentials:
+   ```
+   REACT_APP_SUPABASE_URL=your_supabase_project_url
+   REACT_APP_SUPABASE_ANON_KEY=your_supabase_anon_key
+   ```
 
-### `npm run build`
+### 3. Install Dependencies
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+```bash
+npm install
+```
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+### 4. Run the Application
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+```bash
+npm start
+```
 
-### `npm run eject`
+The app will open at [http://localhost:3000](http://localhost:3000)
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+## Usage
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+### Creating Orders
+1. Navigate to "New Order"
+2. Select products from the grid
+3. Adjust quantities using +/- buttons
+4. Click "Proceed to Checkout"
+5. Enter customer name
+6. Confirm the order
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+### Viewing Orders
+1. Navigate to "Order History"
+2. View all orders with details
+3. Use "Clear All Orders" to reset the system
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
+## Database Schema
 
-## Learn More
+The system uses three main tables:
+- `products`: Store available items with names and prices
+- `orders`: Store order information with customer names and totals
+- `order_items`: Junction table linking orders to products with quantities
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+## Technologies Used
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+- React 18
+- React Router DOM
+- Supabase (PostgreSQL database)
+- CSS3 with responsive design
 
 ### Code Splitting
 
