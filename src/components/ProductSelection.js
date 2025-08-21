@@ -463,18 +463,6 @@ const ProductSelection = ({ onOrderComplete }) => {
     }
   };
 
-  // Fun emojis for different products
-  const getProductEmoji = (productName) => {
-    const name = productName.toLowerCase();
-    if (name.includes('coffee') || name.includes('espresso')) return '☕';
-    if (name.includes('tea')) return '🍵';
-    if (name.includes('cake') || name.includes('dessert')) return '🍰';
-    if (name.includes('sandwich') || name.includes('toast')) return '🥪';
-    if (name.includes('smoothie') || name.includes('juice')) return '🥤';
-    if (name.includes('pastry') || name.includes('croissant')) return '🥐';
-    if (name.includes('muffin')) return '🧁';
-    return '✨'; // default sparkle
-  };
 
   return (
     <MotionBox
