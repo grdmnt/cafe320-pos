@@ -185,6 +185,13 @@ const ProductSelection = ({ onOrderComplete }) => {
     setTimeout(() => setShowConfetti(false), 3000);
   };
 
+  const playSuccessSound = () => {
+    const audio = new Audio('/sounds/success.mp3');
+    audio.play().catch(error => {
+      console.log('Audio playback failed:', error);
+    });
+  };
+
   const showNotification = (type, title, description) => {
     setNotification({ type, title, description });
     setTimeout(() => setNotification(null), 4000);
@@ -246,8 +253,9 @@ const ProductSelection = ({ onOrderComplete }) => {
 
       if (itemsError) throw itemsError;
 
-      // Trigger confetti and show success notification
+      // Trigger confetti, sound, and show success notification
       triggerConfetti();
+      playSuccessSound();
 
       showNotification("success", "Order placed! 🎉", `Your delicious ${selectedProduct.name} is coming right up, ${customerName}!`);
 
