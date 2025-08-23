@@ -20,6 +20,7 @@ const MotionHeading = motion(Heading);
 const OrderList = () => {
   const [orders, setOrders] = useState([]);
   const [loading, setLoading] = useState(true);
+  const [refreshing, setRefreshing] = useState(false);
   const { isOpen, onOpen, onClose } = useDisclosure();
   const cancelRef = React.useRef();
 
@@ -27,8 +28,11 @@ const OrderList = () => {
     fetchOrders();
   }, []);
 
-  const fetchOrders = async () => {
+  const fetchOrders = async (isRefresh = false) => {
     try {
+      if (isRefresh) {
+        setRefreshing(true);
+      }
       const { data, error } = await supabase
         .from('orders')
         .select(`
@@ -47,6 +51,11 @@ const OrderList = () => {
       alert('Error loading orders. Please check your connection and try again.');
     } finally {
       setLoading(false);
+      if (isRefresh) {
+        setTimeout(() => {
+          setRefreshing(false);
+        }, 500);
+      }
     }
   };
 
@@ -79,6 +88,10 @@ const OrderList = () => {
       console.error('Error deleting order:', error);
       alert('Error deleting order. Please try again.');
     }
+  };
+
+  const handleRefresh = () => {
+    fetchOrders(true);
   };
 
   const clearAllOrders = async () => {
@@ -208,24 +221,44 @@ const OrderList = () => {
         >
           Order History
         </MotionHeading>
-        {orders.length > 0 && (
+        <MotionBox display="flex" gap={3}>
           <MotionButton
-            onClick={onOpen}
-            colorScheme="red"
+            onClick={handleRefresh}
+            colorScheme="green"
             size="lg"
-            initial={{ scale: 0, rotate: -180 }}
+            isLoading={refreshing}
+            loadingText="Refreshing"
+            initial={{ scale: 0, rotate: -90 }}
             animate={{ scale: 1, rotate: 0 }}
             whileHover={{ 
               scale: 1.05, 
               y: -2,
-              boxShadow: "0 8px 20px rgba(245, 101, 101, 0.3)"
+              boxShadow: "0 8px 20px rgba(72, 187, 120, 0.3)"
             }}
             whileTap={{ scale: 0.95 }}
-            transition={{ delay: 0.5, type: "spring", stiffness: 300 }}
+            transition={{ delay: 0.3, type: "spring", stiffness: 300 }}
           >
-Clear All
+            🔄 Refresh
           </MotionButton>
-        )}
+          {orders.length > 0 && (
+            <MotionButton
+              onClick={onOpen}
+              colorScheme="red"
+              size="lg"
+              initial={{ scale: 0, rotate: -180 }}
+              animate={{ scale: 1, rotate: 0 }}
+              whileHover={{ 
+                scale: 1.05, 
+                y: -2,
+                boxShadow: "0 8px 20px rgba(245, 101, 101, 0.3)"
+              }}
+              whileTap={{ scale: 0.95 }}
+              transition={{ delay: 0.5, type: "spring", stiffness: 300 }}
+            >
+              Clear All
+            </MotionButton>
+          )}
+        </MotionBox>
       </MotionBox>
 
       {orders.length === 0 ? (
